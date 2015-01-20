@@ -6,8 +6,10 @@
     "start": "nodemon app.js"
   },
   "dependencies": {
+    "body-parser": "^1.10.1",
     "express": "3.19.0",
     "jade": "*",
+    "jake": "^8.0.10",
     "mongoose": "^3.8.21"
   }
 }

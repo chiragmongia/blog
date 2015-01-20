@@ -2,15 +2,14 @@
 /**
  * Module dependencies.
  */
-
 var express = require('express');
-var routes = require('./routes');
-var user = require('./routes/user');
-var models = require('./load_models')();
+var app = express();
+
+require('./router')(app);
+
 var http = require('http');
 var path = require('path');
-
-var app = express();
+var bodyParser = require('body-parser');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -23,14 +22,13 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
-
-app.get('/', routes.index);
-app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

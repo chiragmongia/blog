@@ -1,5 +1,6 @@
 module.exports = function(mongoose) {
   return mongoose.Schema({
-      title: String
+      title: String,
+      content: String
     })
 }
